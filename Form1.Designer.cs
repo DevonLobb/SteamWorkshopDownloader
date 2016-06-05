@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.idLabel = new System.Windows.Forms.Label();
             this.idBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -63,6 +64,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.idLabel);
             this.flowLayoutPanel1.Controls.Add(this.idBox);
             this.flowLayoutPanel1.Controls.Add(this.submitButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -70,30 +72,43 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(126, 305);
             this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.TabStop = true;
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.CausesValidation = false;
+            this.idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idLabel.Location = new System.Drawing.Point(3, 0);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(70, 13);
+            this.idLabel.TabIndex = 1;
+            this.idLabel.Text = "Workshop ID";
             // 
             // idBox
             // 
-            this.idBox.Location = new System.Drawing.Point(3, 3);
+            this.idBox.Location = new System.Drawing.Point(3, 16);
             this.idBox.Name = "idBox";
             this.idBox.Size = new System.Drawing.Size(100, 20);
-            this.idBox.TabIndex = 1;
-            this.idBox.Text = "Workshop ID";
-            this.idBox.Click += new System.EventHandler(this.idBox_Enter);
-            this.idBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.idBox_MouseClick);
-            this.idBox.Enter += new System.EventHandler(this.idBox_Enter);
+            this.idBox.TabIndex = 0;
+            this.idBox.Text = "693684953";
+            this.idBox.TextChanged += new System.EventHandler(this.idBox_TextChanged);
+            this.idBox.MouseHover += new System.EventHandler(this.idBox_TextChanged);
             this.idBox.Validating += new System.ComponentModel.CancelEventHandler(this.idBox_Validating);
             this.idBox.Validated += new System.EventHandler(this.idBox_Validated);
             // 
             // submitButton
             // 
             this.submitButton.AutoSize = true;
-            this.submitButton.Location = new System.Drawing.Point(3, 29);
+            this.submitButton.Enabled = false;
+            this.submitButton.Location = new System.Drawing.Point(3, 42);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(46, 23);
             this.submitButton.TabIndex = 0;
             this.submitButton.Text = "Go";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            this.submitButton.Validating += new System.ComponentModel.CancelEventHandler(this.idBox_Validating);
             // 
             // tableLayoutPanel1
             // 
@@ -126,10 +141,11 @@
             // 
             // downloadButton
             // 
+            this.downloadButton.Enabled = false;
             this.downloadButton.Location = new System.Drawing.Point(0, 0);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(75, 23);
-            this.downloadButton.TabIndex = 0;
+            this.downloadButton.TabIndex = 4;
             this.downloadButton.Text = "Download";
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
@@ -212,6 +228,7 @@
             this.titleBox.ReadOnly = true;
             this.titleBox.Size = new System.Drawing.Size(516, 20);
             this.titleBox.TabIndex = 7;
+            this.titleBox.TextChanged += new System.EventHandler(this.titleBox_TextChanged);
             // 
             // filetitleLabel
             // 
@@ -318,9 +335,9 @@
             // 
             // Form1
             // 
-            this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(743, 548);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
@@ -364,6 +381,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label idLabel;
     }
 }
 

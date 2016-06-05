@@ -22,12 +22,11 @@ namespace SteamWorkshopDownloader
         public Form1()
         {
             InitializeComponent();
-
         }
+
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
@@ -99,40 +98,26 @@ namespace SteamWorkshopDownloader
             //progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
         }
 
-
-        private void idBox_Enter(object sender, EventArgs e)
-        {
-            idBox.SelectAll();
-        }
-
-        private void idBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            idBox.SelectAll();
-        }
-
-        private void idBox_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-
-        private void idBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void idBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
+            submitButton.Enabled = false;
             if (!ValidID(idBox.Text, out errorMsg))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
-                idBox.Select(0, idBox.Text.Length);
+                idBox.SelectAll();
 
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(idBox, errorMsg);
             }
         }
 
-        private void idBox_Validated(object sender, System.EventArgs e)
+        private void idBox_Validated(object sender, EventArgs e)
         {
             // If all conditions have been met, clear the ErrorProvider of errors.
             errorProvider1.SetError(idBox, "");
+            submitButton.Enabled = true;
         }
 
         public bool ValidID(string id, out string errorMessage)
@@ -151,6 +136,18 @@ namespace SteamWorkshopDownloader
 
             errorMessage = "";
             return true;
+        }
+
+        private void idBox_TextChanged(object sender, EventArgs e)
+        {
+            Validate();
+        }
+
+        private void titleBox_TextChanged(object sender, EventArgs e)
+        {
+            if (titleBox.Text != "")
+                downloadButton.Enabled = true;
+            //TODO: Add checks to enable
         }
     }
 }
