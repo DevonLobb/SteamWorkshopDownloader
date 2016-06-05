@@ -17,7 +17,7 @@ namespace SteamWorkshopDownloader
 {
     public partial class Form1 : Form
     {
-        RootObject root;
+        static RootObject root;
 
         public Form1()
         {
@@ -50,14 +50,33 @@ namespace SteamWorkshopDownloader
 
         private void updateFields (RootObject root)
         {
-            titleBox.Text = root.response.publishedfiledetails[0].title;
-            //creatorBox.Text = root.response.publishedfiledetails[0].creator;
-            filenameBox.Text = root.response.publishedfiledetails[0].filename;
-            filesizeBox.Text = root.response.publishedfiledetails[0].file_size.ToString() + " kb";
-            fileurlBox.Text = root.response.publishedfiledetails[0].file_url;
-            createdBox.Text = root.response.publishedfiledetails[0].time_created.ToString();
-            updatedBox.Text = root.response.publishedfiledetails[0].time_updated.ToString();
-            pictureBox1.Load(root.response.publishedfiledetails[0].preview_url);
+            try
+            {
+                titleBox.Text = root.response.publishedfiledetails[0].title;
+                //creatorBox.Text = root.response.publishedfiledetails[0].creator;
+                filesizeBox.Text = root.response.publishedfiledetails[0].file_size.ToString() + " kb";
+                fileurlBox.Text = root.response.publishedfiledetails[0].file_url;
+                createdBox.Text = root.response.publishedfiledetails[0].time_created.ToString();
+                updatedBox.Text = root.response.publishedfiledetails[0].time_updated.ToString();
+            }
+            catch (Exception)
+            { }
+
+            try
+            {
+                filenameBox.Text = root.response.publishedfiledetails[0].filename.Substring(5);
+            }
+            catch (NullReferenceException)
+            {
+                filenameBox.Text = root.response.publishedfiledetails[0].filename;
+            }
+
+            try
+            {
+                pictureBox1.LoadAsync(root.response.publishedfiledetails[0].preview_url);
+            }
+            catch (InvalidOperationException)
+            { }
         }
 
 

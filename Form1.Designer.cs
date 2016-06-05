@@ -33,7 +33,8 @@
             this.idBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.downloadButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.updatedBox = new System.Windows.Forms.TextBox();
             this.updatedLabel = new System.Windows.Forms.Label();
@@ -47,16 +48,15 @@
             this.filesizeLabel = new System.Windows.Forms.Label();
             this.filenameBox = new System.Windows.Forms.TextBox();
             this.filenameLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.downloadButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -111,16 +111,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(743, 548);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label1
+            // panel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 156);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 20);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Date Updated";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel1.Controls.Add(this.downloadButton);
+            this.panel1.Location = new System.Drawing.Point(4, 316);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(103, 100);
+            this.panel1.TabIndex = 3;
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Location = new System.Drawing.Point(0, 0);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(75, 23);
+            this.downloadButton.TabIndex = 0;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -272,24 +279,6 @@
             this.filenameLabel.Text = "Filename:";
             this.filenameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.downloadButton);
-            this.panel1.Location = new System.Drawing.Point(4, 316);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(103, 100);
-            this.panel1.TabIndex = 3;
-            // 
-            // downloadButton
-            // 
-            this.downloadButton.Location = new System.Drawing.Point(0, 0);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(75, 23);
-            this.downloadButton.TabIndex = 0;
-            this.downloadButton.Text = "Download";
-            this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -300,16 +289,27 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(4, 529);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 15);
             this.progressBar1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 156);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Date Updated";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Form1
             // 
@@ -323,9 +323,9 @@
             this.flowLayoutPanel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
