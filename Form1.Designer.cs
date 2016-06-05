@@ -78,6 +78,11 @@
             this.idBox.Size = new System.Drawing.Size(100, 20);
             this.idBox.TabIndex = 1;
             this.idBox.Text = "Workshop ID";
+            this.idBox.Click += new System.EventHandler(this.idBox_Enter);
+            this.idBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.idBox_MouseClick);
+            this.idBox.Enter += new System.EventHandler(this.idBox_Enter);
+            this.idBox.Validating += new System.ComponentModel.CancelEventHandler(this.idBox_Validating);
+            this.idBox.Validated += new System.EventHandler(this.idBox_Validated);
             // 
             // submitButton
             // 
@@ -313,6 +318,7 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 548);

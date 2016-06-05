@@ -28,22 +28,17 @@ namespace SteamWorkshopDownloader
         private void submitButton_Click(object sender, EventArgs e)
         {
 
-            if (idBox.Text != "Workshop ID" && idBox.Text != "")
+            using (var client = new WebClient())
             {
-                using (var client = new WebClient())
-                {
-                    var values = new NameValueCollection();
-                    values["itemcount"] = "1";
-                    values["publishedfileids[0]"] = idBox.Text;
+                var values = new NameValueCollection();
+                values["itemcount"] = "1";
+                values["publishedfileids[0]"] = idBox.Text;
 
-                    var response = client.UploadValues("http://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v0001/", values);
-                    var responseString = Encoding.Default.GetString(response);
-                    root = JsonConvert.DeserializeObject<RootObject>(responseString);
-                    updateFields(root);
-                }
+                var response = client.UploadValues("http://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v0001/", values);
+                var responseString = Encoding.Default.GetString(response);
+                root = JsonConvert.DeserializeObject<RootObject>(responseString);
+                updateFields(root);
             }
-            else
-                MessageBox.Show("Error: No ID provided!");
 
             // TODO: Disable button until it finishes
         }
@@ -79,41 +74,6 @@ namespace SteamWorkshopDownloader
             { }
         }
 
-
-        /* TODO
-        private void submitButton_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            string errorMsg;
-            if (!ValidID(idBox.Text, out errorMsg))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                idBox.Select(0, idBox.Text.Length);
-
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(idBox, errorMsg);
-            }
-        }
-
-        private void submitButton_Validated(object sender, System.EventArgs e)
-        {
-            // If all conditions have been met, clear the ErrorProvider of errors.
-            errorProvider1.SetError(idBox, "");
-        }
-
-        private bool ValidID(string id, out string errorMessage)
-        {
-            errorMessage = "";
-            if (id == "" || id == "Workshop ID")
-            {
-                errorMessage = "An ID is required!";
-                return false;
-            }
-            else
-                return true;
-        }
-        */
-
         private void downloadButton_Click(object sender, EventArgs e)
         {
             saveFileDialog1.FileName = root.response.publishedfiledetails[0].filename;
@@ -137,6 +97,60 @@ namespace SteamWorkshopDownloader
             //double percentage = bytesIn / totalBytes * 100;
 
             //progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+        }
+
+
+        private void idBox_Enter(object sender, EventArgs e)
+        {
+            idBox.SelectAll();
+        }
+
+        private void idBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            idBox.SelectAll();
+        }
+
+        private void idBox_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+
+        private void idBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMsg;
+            if (!ValidID(idBox.Text, out errorMsg))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                idBox.Select(0, idBox.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(idBox, errorMsg);
+            }
+        }
+
+        private void idBox_Validated(object sender, System.EventArgs e)
+        {
+            // If all conditions have been met, clear the ErrorProvider of errors.
+            errorProvider1.SetError(idBox, "");
+        }
+
+        public bool ValidID(string id, out string errorMessage)
+        {
+            if (id.Length == 0)
+            {
+                errorMessage = "An ID is required";
+                return false;
+            }
+
+            if (!id.All(Char.IsDigit))
+            {
+                errorMessage = "Only digits are allowed";
+                return false;
+            }
+
+            errorMessage = "";
+            return true;
         }
     }
 }
