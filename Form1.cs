@@ -75,27 +75,33 @@ namespace SteamWorkshopDownloader
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = root.response.publishedfiledetails[0].filename;
+            downloadButton.Enabled = false;
+
+            saveFileDialog1.FileName = filenameBox.Text;
             saveFileDialog1.ShowDialog();
             WebClient myWebClient = new WebClient();
 
-           // myWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
+            myWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleteCallback);
             // Specify a progress notification handler.
-           // myWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressCallback);
+            myWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressCallback);
+            Uri url = new Uri(root.response.publishedfiledetails[0].file_url);
 
+            myWebClient.DownloadFileAsync(url, saveFileDialog1.FileName );
+        }
 
-            myWebClient.DownloadFile(root.response.publishedfiledetails[0].file_url, saveFileDialog1.FileName );
-
+        private void DownloadFileCompleteCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            downloadButton.Enabled = true;
         }
 
         private void DownloadProgressCallback(object sender, DownloadProgressChangedEventArgs e)
         {
             //TODO
-            //double bytesIn = double.Parse(e.BytesReceived.ToString());
-            //double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-            //double percentage = bytesIn / totalBytes * 100;
+            double bytesIn = double.Parse(e.BytesReceived.ToString());
+            double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+            double percentage = bytesIn / totalBytes * 100;
 
-            //progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+            progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
         }
 
         private void idBox_Validating(object sender, CancelEventArgs e)
