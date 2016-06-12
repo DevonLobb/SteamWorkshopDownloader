@@ -54,6 +54,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.warhammerBox = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -70,7 +71,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(126, 305);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(141, 305);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.TabStop = true;
             // 
@@ -133,16 +134,19 @@
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.warhammerBox);
             this.panel1.Controls.Add(this.downloadButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(4, 316);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(103, 100);
+            this.panel1.Size = new System.Drawing.Size(141, 206);
             this.panel1.TabIndex = 3;
             // 
             // downloadButton
             // 
             this.downloadButton.Enabled = false;
-            this.downloadButton.Location = new System.Drawing.Point(0, 0);
+            this.downloadButton.Location = new System.Drawing.Point(0, 6);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(75, 23);
             this.downloadButton.TabIndex = 4;
@@ -169,7 +173,7 @@
             this.tableLayoutPanel2.Controls.Add(this.filenameBox, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.filenameLabel, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(137, 316);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(152, 316);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -304,7 +308,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(137, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(152, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(602, 305);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -333,6 +337,16 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // warhammerBox
+            // 
+            this.warhammerBox.AutoSize = true;
+            this.warhammerBox.Location = new System.Drawing.Point(1, 35);
+            this.warhammerBox.Name = "warhammerBox";
+            this.warhammerBox.Size = new System.Drawing.Size(137, 17);
+            this.warhammerBox.TabIndex = 5;
+            this.warhammerBox.Text = "TW: Warhammer Mode";
+            this.warhammerBox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,6 +361,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -382,6 +397,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.CheckBox warhammerBox;
     }
 }
 

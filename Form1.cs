@@ -22,6 +22,8 @@ namespace SteamWorkshopDownloader
         public Form1()
         {
             InitializeComponent();
+            ToolTip toolTipWarhammer = new ToolTip();
+            toolTipWarhammer.SetToolTip(warhammerBox, "Check if this is a TW:Warhammer mod");
         }
 
 
@@ -60,7 +62,7 @@ namespace SteamWorkshopDownloader
             {
                 filenameBox.Text = root.response.publishedfiledetails[0].filename.Substring(5);
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
                 filenameBox.Text = root.response.publishedfiledetails[0].filename;
             }
@@ -75,23 +77,38 @@ namespace SteamWorkshopDownloader
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            downloadButton.Enabled = false;
 
             saveFileDialog1.FileName = filenameBox.Text;
             saveFileDialog1.ShowDialog();
-            WebClient myWebClient = new WebClient();
 
-            myWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleteCallback);
-            // Specify a progress notification handler.
-            myWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressCallback);
-            Uri url = new Uri(root.response.publishedfiledetails[0].file_url);
+            if (this.DialogResult == DialogResult.OK)
+            {
+                downloadButton.Enabled = false;
 
-            myWebClient.DownloadFileAsync(url, saveFileDialog1.FileName );
+                WebClient myWebClient = new WebClient();
+                Uri url = new Uri(root.response.publishedfiledetails[0].file_url);
+
+                // Specify a progress notification handler.
+                myWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleteCallback);
+                myWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressCallback);
+
+                myWebClient.DownloadFileAsync(url, saveFileDialog1.FileName);
+            }
         }
 
         private void DownloadFileCompleteCallback(object sender, AsyncCompletedEventArgs e)
         {
             downloadButton.Enabled = true;
+
+            // Trim the first 8 bytes
+            if (warhammerBox.Checked)
+            {
+                byte[] oldBytes = File.ReadAllBytes(saveFileDialog1.FileName);
+                FileStream newFile = new FileStream(saveFileDialog1.FileName, FileMode.Create);
+                newFile.Write(oldBytes, 8, oldBytes.Count() - 8);
+                newFile.Close();
+            }
+
         }
 
         private void DownloadProgressCallback(object sender, DownloadProgressChangedEventArgs e)
@@ -151,8 +168,10 @@ namespace SteamWorkshopDownloader
 
         private void titleBox_TextChanged(object sender, EventArgs e)
         {
-            if (titleBox.Text != "")
+            if (titleBox.Text != "" && root.response.publishedfiledetails[0].file_url != "")
                 downloadButton.Enabled = true;
+            else
+                downloadButton.Enabled = false;
             //TODO: Add checks to enable
         }
     }
