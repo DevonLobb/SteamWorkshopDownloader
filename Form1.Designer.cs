@@ -35,6 +35,7 @@
             this.submitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.warhammerBox = new System.Windows.Forms.CheckBox();
             this.downloadButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.updatedBox = new System.Windows.Forms.TextBox();
@@ -54,7 +55,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.warhammerBox = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -142,6 +142,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(141, 206);
             this.panel1.TabIndex = 3;
+            // 
+            // warhammerBox
+            // 
+            this.warhammerBox.AutoSize = true;
+            this.warhammerBox.Location = new System.Drawing.Point(1, 35);
+            this.warhammerBox.Name = "warhammerBox";
+            this.warhammerBox.Size = new System.Drawing.Size(137, 17);
+            this.warhammerBox.TabIndex = 5;
+            this.warhammerBox.Text = "TW: Warhammer Mode";
+            this.warhammerBox.UseVisualStyleBackColor = true;
             // 
             // downloadButton
             // 
@@ -336,16 +346,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // warhammerBox
-            // 
-            this.warhammerBox.AutoSize = true;
-            this.warhammerBox.Location = new System.Drawing.Point(1, 35);
-            this.warhammerBox.Name = "warhammerBox";
-            this.warhammerBox.Size = new System.Drawing.Size(137, 17);
-            this.warhammerBox.TabIndex = 5;
-            this.warhammerBox.Text = "TW: Warhammer Mode";
-            this.warhammerBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
